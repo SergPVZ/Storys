@@ -19,7 +19,10 @@ public class Analizer {
     public Map<String, Integer> getStoreWithSmallQuantityProdukts(List<Product> products, List<Warehouse> warehouses) {
         return
                 warehouses.stream()
-                        .filter(warehouse -> warehouse.getQuantity() <50 );
+                        .filter(warehouse -> warehouse.getQuantity() <50 )
+                        .collect(Collectors.toMap(
+                                warehouses -> warehouses.
+                        ))
 //                        .collect(Collectors.toMap(
 
 //                                store -> store,
@@ -38,12 +41,19 @@ public class Analizer {
 //                                        .orElse(-1))
 //                        );
 
+    private String getNameProduct(List<Product> products, int productId) {
+        return
+                products.stream()
+                        .filter(product -> product.getId() == productId)
+                        .toList();
+    }
+
 
 
 //       5        Найти магазины, где нет ни одного товара категории "Фрукты".
 //               (Проверить, что в Warehouse нет записей с product.category = "Фрукты" для данного storeId).
 
-    public List<Store> getLisfStoreNotFruct(List<Store> stores) {
+    public List<Store> getLisfStoreNotFruct(List<Store> stores, List<Warehouse> warehouses, List<Product> products) {
         return
                 stores.stream()
                         .filter(store -> store.)

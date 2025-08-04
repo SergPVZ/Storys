@@ -212,8 +212,7 @@ public class AnalizerTest {
                 new Warehouse(4, 4, 40)    // В Дикси 4 - 40 молока
         );
 
-        List<String> shopWithoutFruit = analyzer.getLisfStoreNotFruct();
-        shopWithoutFruit = List.of("Пятерочка", "Дикси");
+        List<Store> shopWithoutFruit = analyzer.getLisfStoreNotFruct(stores, warehouses, products);
 
         assertEquals(products.get(0).getId(), warehouses.get(0).getProductId());
         assertEquals(products.get(1).getId(), warehouses.get(1).getProductId());
@@ -246,8 +245,7 @@ public class AnalizerTest {
                 new Warehouse(4, 4, 40)    // В Дикси 4 - 40 яблок
         );
 
-        List<String> shopWithoutFruit = analyzer.getLisfStoreNotFruct();
-        shopWithoutFruit = List.of("Пятерочка", "Дикси");
+        List<Store> shopWithoutFruit = analyzer.getLisfStoreNotFruct(stores, warehouses, products);
 
         assertEquals(products.get(1).getId(), warehouses.get(1).getProductId());
         assertEquals(warehouses.get(1).getId(), stores.get(1).getId());
@@ -272,12 +270,15 @@ public class AnalizerTest {
                 new Warehouse(4, 2, 40)
         );
 
-        List<String> shopWithoutFruit = analyzer.getLisfStoreNotFruct();
-        shopWithoutFruit = List.of(null);
+        List<Product> products = Arrays.asList(
+                new Product(1, "Помидоры", "Овощи", 120.0),
+                new Product(2, "Яблоки", "Фрукты", 80.0),
+                new Product(4, "Молоко", "Молочные продукты", 70.0)
+        );
 
-        assertTrue(warehouses.get(0).getProductId() == 2);
-        assertTrue(warehouses.get(1).getProductId() == 2);
-        assertTrue(warehouses.get(2).getProductId() == 2);
+        List<Store> shopWithoutFruit = analyzer.getLisfStoreNotFruct(stores, warehouses, products);
+
+        assertTrue(shopWithoutFruit.isEmpty());             // isEmpry  - для проверки пустая или нет коллекция
 
     }
 
